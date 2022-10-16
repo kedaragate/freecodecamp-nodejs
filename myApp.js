@@ -4,15 +4,8 @@ let express = require("express");
 let app = express();
 app.use("/public", express.static(__dirname + "/public"));
 
-app.get(
-  "/now",
-  (req, res, next) => {
-    req.time = new Date().toString();
-    next();
-  },
-  function (req, res) {
-    res.json({ time: req.time });
-  }
-);
+app.get("/:word/echo", (req, res, next) => {
+  res.json({ echo: req.params.word });
+});
 
 module.exports = app;
