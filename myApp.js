@@ -8,13 +8,11 @@ app.use(bodyParser.json());
 
 app.use("/public", express.static(__dirname + "/public"));
 
-app
-  .route("/name")
-  .get((req, res) => {
-    res.json({ name: `${req.query.first} ${req.query.last}` });
-  })
-  .post((req, res) => {
-    res.json({ name: `${req.body.first} ${req.body.last}` });
-  });
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/views/index.html");
+});
+app.post("/name", (req, res) => {
+  res.json({ name: `${req.body.first} ${req.body.last}` });
+});
 
 module.exports = app;
